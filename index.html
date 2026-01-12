@@ -3,82 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTEX | Private Software</title>
+    <title>VORTEX | Digital Utilities</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
-        .card { background: #0a0a0a; border: 1px solid #151515; border-radius: 24px; padding: 2rem; }
+        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .card { background: #0a0a0a; border: 1px solid #151515; border-radius: 24px; padding: 2rem; transition: 0.3s; }
         .buy-btn { background: #6366f1; border-radius: 12px; font-weight: 800; text-align: center; display: block; padding: 18px; transition: 0.3s; cursor: pointer; border: none; width: 100%; color: white; text-transform: uppercase; letter-spacing: 1px; }
         .buy-btn:hover { background: #4f46e5; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); }
         .order-id-box { background: #111; border: 1px dashed #333; padding: 10px; border-radius: 8px; font-family: monospace; color: #6366f1; }
-        .img-zoom { transition: transform 0.5s ease; cursor: pointer; }
-        .img-zoom:hover { transform: scale(1.02); }
-        select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
+        .product-card { cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+        .product-card:hover { border-color: #6366f1; background: #111; }
+        .active-product { border-color: #6366f1; background: #111; box-shadow: 0 0 30px rgba(99, 102, 241, 0.1); }
+        .hidden { display: none; }
     </style>
 </head>
 <body class="p-6">
 
     <nav class="max-w-6xl mx-auto flex justify-between items-center py-8">
-        <h1 class="text-3xl font-black italic tracking-tighter text-indigo-500 underline decoration-indigo-500/30">VORTEX</h1>
+        <h1 class="text-3xl font-black italic tracking-tighter text-indigo-500">VORTEX</h1>
         <div class="space-x-8 text-sm font-bold text-gray-400 uppercase tracking-widest">
-            <a href="#products" class="hover:text-white transition">Products</a>
-            <a href="https://discord.gg/j5eWUrE7jm" class="hover:text-white transition">Discord</a>
+            <a href="https://discord.gg/j5eWUrE7jm" target="_blank" class="hover:text-white transition">Join Discord</a>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto mt-12 space-y-16">
+    <main class="max-w-5xl mx-auto mt-12 space-y-12">
         
-        <section id="products" class="card">
+        <div class="text-center">
+            <h2 class="text-sm font-black text-indigo-500 uppercase tracking-[0.3em] mb-4">Step One</h2>
+            <h3 class="text-4xl font-black italic">CHOOSE YOUR SOFTWARE</h3>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div id="select-spoofer" onclick="showProduct('spoofer')" class="product-card card text-center">
+                <div class="text-5xl mb-4">🛡️</div>
+                <h4 class="text-2xl font-black italic">VORTEX SPOOFER</h4>
+                <p class="text-gray-500 text-sm mt-2">HWID Protection & System Cleaner</p>
+            </div>
+            <div id="select-gen" onclick="showProduct('gen')" class="product-card card text-center">
+                <div class="text-5xl mb-4">🔑</div>
+                <h4 class="text-2xl font-black italic">ACCOUNT GEN</h4>
+                <p class="text-gray-500 text-sm mt-2">Instant Asset & Alt Generation</p>
+            </div>
+        </div>
+
+        <section id="product-details" class="hidden card">
             <div class="flex justify-between items-start mb-8">
                 <div>
-                    <h2 class="text-5xl font-black italic mb-2">VORTEX SYSTEM</h2>
-                    <p class="text-gray-500 font-medium">All-in-one Spoofer & Account Asset Generator</p>
+                    <h2 id="detail-title" class="text-5xl font-black italic mb-2 uppercase text-white">---</h2>
+                    <p id="detail-desc" class="text-gray-500 font-medium">---</p>
                 </div>
-                <span class="bg-indigo-500/10 text-indigo-400 text-xs font-black px-3 py-1 rounded-full uppercase border border-indigo-500/20">Status: Undetected</span>
+                <span class="bg-green-500/10 text-green-400 text-xs font-black px-3 py-1 rounded-full uppercase border border-green-500/20">Active & Undetected</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
                 <div class="md:col-span-2 h-80 overflow-hidden rounded-2xl">
-                    <img src="https://i.postimg.cc/j5700hSc/Screenshot-2026-01-12-211945.png" class="w-full h-full object-cover img-zoom border border-white/5 shadow-2xl">
+                    <img id="img-main" src="" class="w-full h-full object-cover border border-white/5 shadow-2xl">
                 </div>
                 <div class="grid grid-rows-2 gap-4 h-80">
-                    <div class="overflow-hidden rounded-2xl">
-                        <img src="https://i.postimg.cc/j5JvdgfG/Screenshot-2026-01-12-211121.png" class="w-full h-full object-cover img-zoom border border-white/5">
-                    </div>
-                    <div class="overflow-hidden rounded-2xl">
-                        <img src="https://i.postimg.cc/tTVDCSP0/Screenshot-2026-01-12-211230.png" class="w-full h-full object-cover img-zoom border border-white/5">
-                    </div>
+                    <img id="img-sub1" src="" class="w-full h-full object-cover rounded-2xl border border-white/5">
+                    <img id="img-sub2" src="" class="w-full h-full object-cover rounded-2xl border border-white/5">
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12">
+            <div class="grid md:grid-cols-2 gap-12 pt-8 border-t border-white/5">
                 <div class="space-y-6">
-                    <h4 class="text-lg font-bold uppercase tracking-tighter text-indigo-400">01. Select Product & Tier</h4>
+                    <h4 class="text-lg font-bold uppercase tracking-tighter text-indigo-400">Select Access Tier</h4>
                     <select id="access-tier" class="w-full bg-[#111] border border-white/10 p-4 rounded-xl text-white font-bold outline-none focus:border-indigo-500">
-                        <optgroup label="Vortex Spoofer" class="bg-black">
-                            <option value="Spoofer-WK">Spoofer: Weekly — £5.00</option>
-                            <option value="Spoofer-MO">Spoofer: Monthly — £15.00</option>
-                            <option value="Spoofer-LT">Spoofer: Lifetime — £40.00</option>
-                        </optgroup>
-                        <optgroup label="Account Generator" class="bg-black">
-                            <option value="Gen-WK">Acc Gen: Weekly — £18.0</option>
-                            <option value="Gen-MO">Acc Gen: Monthly — £40.00</option>
-                            <option value="Gen-LT">Acc Gen: Lifetime — £60.00</option>
-                        </optgroup>
-                    </select>
-                    
-                    <button onclick="generateOrder()" class="buy-btn">Generate Purchase Code</button>
+                        </select>
+                    <button onclick="generateOrder()" class="buy-btn">Get Purchase Code</button>
                 </div>
 
                 <div id="payment-panel" class="hidden space-y-4">
-                    <h4 class="text-lg font-bold uppercase tracking-tighter text-green-400">02. Finalize in Discord</h4>
-                    <p class="text-sm text-gray-400">Copy your code and paste it in a ticket:</p>
+                    <h4 class="text-lg font-bold uppercase tracking-tighter text-green-400">Order Ready</h4>
+                    <p class="text-sm text-gray-400">Provide this code in our Discord Ticket:</p>
                     <div class="order-id-box flex justify-between items-center px-4">
                         <span id="display-id" class="text-xl font-bold tracking-widest">---</span>
-                        <button onclick="copyId()" class="text-[10px] bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-white font-bold">COPY</button>
+                        <button onclick="copyId()" class="text-[10px] bg-white/10 px-3 py-1 rounded text-white font-bold uppercase">Copy</button>
                     </div>
-                    <a href="https://discord.gg/j5eWUrE7jm" class="block bg-indigo-500 text-white text-center py-4 rounded-xl font-black hover:bg-indigo-600 transition">OPEN TICKET IN DISCORD</a>
-                    <p class="text-[10px] text-gray-600 uppercase text-center font-bold">Payments: PayPal F&F | CashApp | Crypto</p>
+                    <a href="https://discord.gg/j5eWUrE7jm" class="block bg-indigo-500 text-white text-center py-4 rounded-xl font-black hover:bg-indigo-600 transition">OPEN DISCORD TICKET</a>
+                    <p class="text-[10px] text-gray-600 uppercase text-center font-bold">Manual Verification Required</p>
                 </div>
             </div>
         </section>
@@ -86,25 +89,64 @@
     </main>
 
     <script>
+        const products = {
+            'spoofer': {
+                title: 'Vortex Spoofer',
+                desc: 'Hardware ID protection for competitive play.',
+                imgs: ['https://i.postimg.cc/j5700hSc/Screenshot-2026-01-12-211945.png', 'https://i.postimg.cc/j5JvdgfG/Screenshot-2026-01-12-211121.png', 'https://i.postimg.cc/tTVDCSP0/Screenshot-2026-01-12-211230.png'],
+                tiers: [
+                    { name: 'Spoofer Weekly', price: '£5.00', val: 'SP-WK' },
+                    { name: 'Spoofer Monthly', price: '£15.00', val: 'SP-MO' },
+                    { name: 'Spoofer Lifetime', price: '£40.00', val: 'SP-LT' }
+                ]
+            },
+            'gen': {
+                title: 'Account Gen',
+                desc: 'Generate unlimited gaming assets instantly.',
+                imgs: ['https://i.postimg.cc/j5JvdgfG/Screenshot-2026-01-12-211121.png', 'https://i.postimg.cc/tTVDCSP0/Screenshot-2026-01-12-211230.png', 'https://i.postimg.cc/j5700hSc/Screenshot-2026-01-12-211945.png'],
+                tiers: [
+                    { name: 'Gen Weekly', price: '£18.00', val: 'GEN-WK' },
+                    { name: 'Gen Monthly', price: '£30.00', val: 'GEN-MO' },
+                    { name: 'Gen Lifetime', price: '£60.00', val: 'GEN-LT' }
+                ]
+            }
+        };
+
+        function showProduct(type) {
+            const data = products[type];
+            document.getElementById('product-details').classList.remove('hidden');
+            document.getElementById('detail-title').innerText = data.title;
+            document.getElementById('detail-desc').innerText = data.desc;
+            document.getElementById('img-main').src = data.imgs[0];
+            document.getElementById('img-sub1').src = data.imgs[1];
+            document.getElementById('img-sub2').src = data.imgs[2];
+
+            const tierSelect = document.getElementById('access-tier');
+            tierSelect.innerHTML = data.tiers.map(t => `<option value="${t.val}">${t.name} — ${t.price}</option>`).join('');
+
+            document.getElementById('select-spoofer').className = type === 'spoofer' ? 'product-card card active-product' : 'product-card card';
+            document.getElementById('select-gen').className = type === 'gen' ? 'product-card card active-product' : 'product-card card';
+            
+            document.getElementById('payment-panel').classList.add('hidden');
+            document.getElementById('product-details').scrollIntoView({ behavior: 'smooth' });
+        }
+
         function generateOrder() {
             const tier = document.getElementById('access-tier').value;
             const randomNum = Math.floor(1000 + Math.random() * 9000);
-            const orderId = "VTX-" + randomNum + "-" + tier.toUpperCase();
-            
-            document.getElementById('display-id').innerText = orderId;
+            document.getElementById('display-id').innerText = `VTX-${randomNum}-${tier}`;
             document.getElementById('payment-panel').classList.remove('hidden');
-            document.getElementById('payment-panel').scrollIntoView({ behavior: 'smooth' });
         }
 
         function copyId() {
             const idText = document.getElementById('display-id').innerText;
             navigator.clipboard.writeText(idText);
-            alert("Code Copied! Now open a ticket in our Discord.");
+            alert("Order Code Copied!");
         }
     </script>
 
     <footer class="py-20 text-center text-gray-800 font-bold text-xs uppercase tracking-widest">
-        Vortex Services © 2026 | Private Maintenance Utility
+        Vortex Services © 2026 | Safe Utilities
     </footer>
 
 </body>
